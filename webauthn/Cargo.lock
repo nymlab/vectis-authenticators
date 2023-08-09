@@ -20,26 +20,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3b13c32d80ecc7ab747b80c3784bce54ee8a7a0cc4fbda9bf4cda2cf6fe90854"
 
 [[package]]
-name = "asn1"
-version = "0.15.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de594fb2adce376d7955c41e273e1ba22b0476b8763c383362b99c3d78fee593"
-dependencies = [
- "asn1_derive",
-]
-
-[[package]]
-name = "asn1_derive"
-version = "0.15.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc6da21a2122ddd982cab7a7a73b961d12398e96c2faae5cd4d62593a5e7342f"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.28",
-]
-
-[[package]]
 name = "base16ct"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1202,7 +1182,9 @@ checksum = "1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36"
 
 [[package]]
 name = "vectis-wallet"
-version = "0.2.1"
+version = "1.0.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8665878b78e8ae2adb77af8490f4586ec8f06daa25aa9886d07e0f3a89d449fc"
 dependencies = [
  "bech32",
  "cosmwasm-schema",
@@ -1227,26 +1209,19 @@ dependencies = [
 name = "vectis-webauthn-authenticator"
 version = "0.1.0"
 dependencies = [
- "anyhow",
- "asn1",
+ "base64ct",
  "cosmwasm-schema",
  "cosmwasm-std",
  "cosmwasm-storage",
  "cw-multi-test",
- "cw-storage-plus",
- "cw-utils",
  "cw2",
  "p256",
- "proc-macro2",
- "quote",
  "ripemd160",
  "serde",
  "serde-json-wasm",
  "sha2 0.9.9",
  "sylvia",
  "sylvia-derive",
- "syn 1.0.109",
- "thiserror",
  "vectis-wallet",
 ]
 

@@ -1,4 +1,4 @@
-use cosmwasm_std::{to_binary, Binary, Event, Response};
+use cosmwasm_std::{Event, Response};
 use cw2::set_contract_version;
 use sylvia::types::QueryCtx;
 use sylvia::{contract, schemars, types::InstantiateCtx};
@@ -11,14 +11,14 @@ use vectis_wallet::{
 
 //// verification lib
 use p256::ecdsa::signature::Verifier;
-use p256::ecdsa::{Signature, VerifyingKey};
+use p256::ecdsa::{DerSignature, VerifyingKey};
 use p256::PublicKey;
 use ripemd160::Digest as Ripemd160Digest;
 use sha2::Sha256;
 
 // webauthn types and decoding
 use crate::types::CollectedClientData;
-//use base64ct::Encoding;
+use base64ct::Encoding;
 
 #[cfg(not(feature = "library"))]
 use sylvia::entry_points;
@@ -33,8 +33,7 @@ pub(crate) fn de_client_data(data: &[u8]) -> Result<CollectedClientData, Authent
 }
 
 pub(crate) fn hash_to_base64url_string<'a>(data: &[u8]) -> String {
-    //base64ct::Base64Url::encode_string(Sha256::digest(data).as_slice())
-    String::from_utf8_lossy(data).to_string()
+    base64ct::Base64UrlUnpadded::encode_string(Sha256::digest(data).as_slice())
 }
 
 #[contract]
@@ -67,22 +66,21 @@ impl AuthenicatorExport for Webauthn {
         // -------------------
         // https://w3c.github.io/webauthn/#sctn-signature-attestation-types
         // Convert signature from ASN.1 sequence to "raw" format
-        //   let verify_signature = DerSignature::from_bytes(&signature)
-        //       .map_err(|e| AuthenticatorError::SignatureParse(e.to_string()))?;
+        let verify_signature = DerSignature::from_bytes(&signature)
+            .map_err(|e| AuthenticatorError::SignatureParse(e.to_string()))?;
 
-        //   let pub_key = PublicKey::from_sec1_bytes(&controller_data)
-        //       .map_err(|e| AuthenticatorError::PubKeyParse(e.to_string()))?;
+        let pub_key = PublicKey::from_sec1_bytes(&controller_data)
+            .map_err(|e| AuthenticatorError::PubKeyParse(e.to_string()))?;
 
-        //   let verifier = VerifyingKey::from(&pub_key);
-        //   // The data that should have been signed
-        //   // This includes the msg we verified in the first step
-        //   let auth_data = &metadata[0];
-        //   let client_data_hash = Sha256::digest(&metadata[1]);
-        //   let auth_signed_data = [auth_data.as_slice(), client_data_hash.as_ref()].concat();
-        //   let result = verifier.verify(&auth_signed_data, &verify_signature);
+        let verifier = VerifyingKey::from(&pub_key);
+        // The data that should have been signed
+        // This includes the msg we verified in the first step
+        let auth_data = &metadata[0];
+        let client_data_hash = Sha256::digest(&metadata[1]);
+        let auth_signed_data = [auth_data.as_slice(), client_data_hash.as_ref()].concat();
+        let result = verifier.verify(&auth_signed_data, &verify_signature);
 
-        //   Ok(result.is_ok())
-        Ok(true)
+        Ok(result.is_ok())
     }
 }
 
