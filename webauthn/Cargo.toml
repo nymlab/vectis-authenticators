@@ -22,22 +22,26 @@ cosmwasm-storage = "1.2"
 cosmwasm-schema = "1.2" 
 sylvia = "0.7.0"
 sylvia-derive = "0.7.0"
-cw-utils = "1.0.1"
-thiserror = { version = "1.0.30" }
-cw-storage-plus = "1.1"
 cw2 = "1.1"
-anyhow = { version = "1.0.51"}
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 serde-json-wasm = "0.5.1"
-proc-macro2 = "1.0"
-quote = "1.0"
-syn = { version = "1.0", features = ["derive"] }
 sha2 = "0.9"
 ripemd160 = "0.9.1"
-p256 = {version = "0.13.2", default-features = false, features = ["alloc", "ecdsa"]}
-asn1 = { version = "0.15" } 
-vectis-wallet = { path = "../../vectis/packages/vectis" }
+p256 = {version = "0.13.2", default-features = false, features = ["alloc", "ecdsa-core"]}
+vectis-wallet = { path = "../../../packages/vectis" }
+# cosmwasm-std.workspace = true
+# cosmwasm-storage.workspace = true
+# cosmwasm-schema.workspace = true
+# sylvia.workspace = true
+# sylvia-derive.workspace = true
+# cw-storage-plus.workspace = true
+# cw2.workspace = true
+# anyhow.workspace = true
+# serde.workspace = true
+# serde-json-wasm.workspace = true
+# sha2 = "0.9"
+# ripemd160 = "0.9.1"
+# # base64ct = {version = "1.6.0", default-features = false, features = ["alloc"] }
 
 [dev-dependencies]
 cw-multi-test = "0.16"
-

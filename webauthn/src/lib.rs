@@ -1,2 +1,5 @@
 pub mod contract;
-// mod types;
+mod types;
+
+#[cfg(test)]
+mod test;

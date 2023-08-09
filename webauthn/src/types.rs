@@ -1,5 +1,7 @@
 use cosmwasm_schema::cw_serde;
 
+// Source from https://docs.rs/passkey-types/latest/src/passkey_types/webauthn/attestation.rs.html#473-497
+// We cannot directly import from the crate with some issues with `getrandom` to wasm.
 #[cw_serde]
 #[serde(rename_all = "camelCase")]
 pub struct CollectedClientData {
