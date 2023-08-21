@@ -1,12 +1,14 @@
 use cosmwasm_std::{Event, Response};
 use cw2::set_contract_version;
-use sylvia::types::QueryCtx;
-use sylvia::{contract, schemars, types::InstantiateCtx};
+use sylvia::{
+    contract, schemars,
+    types::{InstantiateCtx, QueryCtx},
+};
 
 // Vectis lib
 use vectis_wallet::{
-    authenicator_export,
-    authenicator_export::{AuthenicatorExport, AuthenticatorError},
+    interface::{authenticator_trait, AuthenticatorTrait},
+    types::error::AuthenticatorError,
 };
 
 //// verification lib
@@ -29,7 +31,8 @@ const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 pub struct Webauthn {}
 
 pub(crate) fn de_client_data(data: &[u8]) -> Result<CollectedClientData, AuthenticatorError> {
-    serde_json_wasm::from_slice(data).map_err(|_| AuthenticatorError::DecodeClientData)
+    serde_json_wasm::from_slice(data)
+        .map_err(|_| AuthenticatorError::DecodeData("client_data".into()))
 }
 
 pub(crate) fn hash_to_base64url_string<'a>(data: &[u8]) -> String {
@@ -37,8 +40,8 @@ pub(crate) fn hash_to_base64url_string<'a>(data: &[u8]) -> String {
 }
 
 #[contract]
-#[messages(authenicator_export as AuthenicatorExport)]
-impl AuthenicatorExport for Webauthn {
+#[messages(authenticator_trait as AuthenticatorTrait)]
+impl AuthenticatorTrait for Webauthn {
     type Error = AuthenticatorError;
 
     #[msg(query)]
@@ -87,7 +90,7 @@ impl AuthenicatorExport for Webauthn {
 #[cfg_attr(not(feature = "library"), entry_points)]
 #[contract]
 #[error(AuthenticatorError)]
-#[messages(authenicator_export as AuthenticatorExport)]
+#[messages(authenticator_trait as AuthenticatorTrait)]
 impl Webauthn {
     pub const fn new() -> Self {
         Self {}

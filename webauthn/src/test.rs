@@ -6,7 +6,7 @@ use cosmwasm_std::{
     Binary,
 };
 use sylvia::types::QueryCtx;
-use vectis_wallet::{authenicator_export::AuthenicatorExport, WebauthnRelayedTxMsg};
+use vectis_wallet::{interface::AuthenticatorTrait, types::wallet::WebauthnRelayedTxMsg};
 
 const CREDENTIAL_ID: &str = "h0Yl_6BZOh6qK95O5LdWwQuU7ttBCylwC-_Jg9-LW4A";
 

@@ -35,8 +35,9 @@ serde-json-wasm = "0.5.1"
 sha2 = "0.9"
 ripemd160 = "0.9.1"
 p256 = {version = "0.13.2", default-features = false, features = ["alloc", "ecdsa"]}
-vectis-wallet = "1.0.0-beta"
-base64ct = {version = "1.6.0", default-features = false, features = ["alloc"] }
+ vectis-wallet = "1.0.0-rc1"
+# vectis-wallet = { path = "../../vectis/packages/vectis" }
+ base64ct = {version = "1.6.0", default-features = false, features = ["alloc"] }
 
 [dev-dependencies]
 cw-multi-test = "0.16"
