@@ -1,6 +1,6 @@
 [package]
 name = "vectis-webauthn-authenticator"
-version = "0.1.0"
+version = "1.0.0-rc1"
 authors = ["bwty <whalelephant@users.noreply.github.com>", "j0nl1 <j0nl1@gmail.com>"]
 edition = "2021"
 
@@ -20,7 +20,7 @@ library = []
 optimize = """docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.12.10
+  cosmwasm/rust-optimizer:0.13.00
 """
 
 [dependencies]
