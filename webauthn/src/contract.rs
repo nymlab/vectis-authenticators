@@ -1,5 +1,5 @@
-use cosmwasm_std::{Event, Response};
-use cw2::set_contract_version;
+use cosmwasm_std::{Event, Response, StdError};
+use cw2::{get_contract_version, set_contract_version, ContractVersion};
 use sylvia::{
     contract, schemars,
     types::{InstantiateCtx, QueryCtx},
@@ -84,6 +84,11 @@ impl AuthenticatorTrait for Webauthn {
         let result = verifier.verify(&auth_signed_data, &verify_signature);
 
         Ok(result.is_ok())
+    }
+
+    #[msg(query)]
+    fn contract_version(&self, ctx: QueryCtx) -> Result<ContractVersion, StdError> {
+        get_contract_version(ctx.deps.storage)
     }
 }
 
