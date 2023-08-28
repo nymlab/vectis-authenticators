@@ -104,7 +104,11 @@ impl Webauthn {
     #[msg(instantiate)]
     fn instantiate(&self, ctx: InstantiateCtx) -> Result<Response, AuthenticatorError> {
         set_contract_version(ctx.deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
-        let event = Event::new("vectis.webauthn.v1");
+        let event = self.get_event("instantiate");
         Ok(Response::new().add_event(event))
+    }
+
+    pub(crate) fn get_event(&self, action: impl Into<String>) -> Event {
+        Event::new("vectis.webauthn.v1").add_attribute("action", action)
     }
 }
