@@ -47,7 +47,7 @@ impl AuthenticatorTrait for Webauthn {
     #[msg(query)]
     fn authenticate(
         &self,
-        _ctx: QueryCtx,
+        ctx: QueryCtx,
         signed_data: Vec<u8>,
         controller_data: Vec<u8>,
         /// metadata: [auth_data, client_data]
@@ -57,13 +57,20 @@ impl AuthenticatorTrait for Webauthn {
         // ---------------------
         // First: we check if the signed data contains the msgs we have been told to execute
         // ---------------------
+        //
+
+        ctx.deps.api.debug("in Authenticator");
+
         let client_data = de_client_data(&metadata[1])?;
+
+        ctx.deps.api.debug("got client_data");
         // the signed challenge should be the hash of the string of the `VectisRelayTx` type
         let expected_hash_string = hash_to_base64url_string(&signed_data);
         if client_data.challenge != expected_hash_string {
             return Err(AuthenticatorError::InvalidChallenge);
         }
 
+        ctx.deps.api.debug("No challenge mismatch");
         // -------------------
         // Second: we can verify the signature
         // -------------------
@@ -71,9 +78,12 @@ impl AuthenticatorTrait for Webauthn {
         // Convert signature from ASN.1 sequence to "raw" format
         let verify_signature = DerSignature::from_bytes(&signature)
             .map_err(|e| AuthenticatorError::SignatureParse(e.to_string()))?;
+        ctx.deps.api.debug("got verify signature");
 
         let pub_key = PublicKey::from_sec1_bytes(&controller_data)
             .map_err(|e| AuthenticatorError::PubKeyParse(e.to_string()))?;
+
+        ctx.deps.api.debug("got pubkey");
 
         let verifier = VerifyingKey::from(&pub_key);
         // The data that should have been signed
@@ -82,6 +92,7 @@ impl AuthenticatorTrait for Webauthn {
         let client_data_hash = Sha256::digest(&metadata[1]);
         let auth_signed_data = [auth_data.as_slice(), client_data_hash.as_ref()].concat();
         let result = verifier.verify(&auth_signed_data, &verify_signature);
+        ctx.deps.api.debug(&format!("RESUTL: {:?}", result));
 
         Ok(result.is_ok())
     }
