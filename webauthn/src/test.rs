@@ -1,4 +1,3 @@
-use super::*;
 use crate::contract::*;
 use cosmwasm_std::{
     from_binary,
@@ -8,9 +7,6 @@ use cosmwasm_std::{
 use sylvia::types::QueryCtx;
 use vectis_wallet::{interface::AuthenticatorTrait, types::wallet::WebauthnRelayedTxMsg};
 
-const CREDENTIAL_ID: &str = "h0Yl_6BZOh6qK95O5LdWwQuU7ttBCylwC-_Jg9-LW4A";
-
-const PUB_KEY_HEX: &str = "0x04fed55179f2d1b2aba0d1dcf3c79c3907bb74dbc665593437744c2c1e43008fbd4bf419db33cc5a5e76fde66f194296b910b18fb93aae69c7bbd132708058c9c7";
 const PUB_KEY_BYTES: [u8; 65] = [
     4, 254, 213, 81, 121, 242, 209, 178, 171, 160, 209, 220, 243, 199, 156, 57, 7, 187, 116, 219,
     198, 101, 89, 52, 55, 116, 76, 44, 30, 67, 0, 143, 189, 75, 244, 25, 219, 51, 204, 90, 94, 118,
