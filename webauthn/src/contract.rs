@@ -47,7 +47,7 @@ impl AuthenticatorTrait for Webauthn {
     #[msg(query)]
     fn authenticate(
         &self,
-        ctx: QueryCtx,
+        _ctx: QueryCtx,
         signed_data: Vec<u8>,
         controller_data: Vec<u8>,
         /// metadata: [auth_data, client_data]
