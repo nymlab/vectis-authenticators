@@ -40,4 +40,4 @@ vectis-wallet = { path = "../../../packages/vectis" }
 base64ct = {version = "1.6.0", default-features = false, features = ["alloc"] }
 
 [dev-dependencies]
-sylvia = { version =  "0.7.0", features = ["mt"]}
+sylvia = {version = "0.8.1", features = ["mt"]}
