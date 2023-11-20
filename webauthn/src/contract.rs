@@ -11,7 +11,7 @@ use vectis_wallet::{
     types::error::AuthenticatorError,
 };
 
-//// verification lib
+/// verification lib
 use p256::ecdsa::signature::Verifier;
 use p256::ecdsa::{DerSignature, VerifyingKey};
 use p256::PublicKey;
@@ -34,7 +34,7 @@ pub(crate) fn de_client_data(data: &[u8]) -> Result<CollectedClientData, Authent
         .map_err(|_| AuthenticatorError::DecodeData("client_data".into()))
 }
 
-pub(crate) fn hash_to_base64url_string<'a>(data: &[u8]) -> String {
+pub(crate) fn hash_to_base64url_string(data: &[u8]) -> String {
     base64ct::Base64UrlUnpadded::encode_string(Sha256::digest(data).as_slice())
 }
 

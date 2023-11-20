@@ -98,7 +98,7 @@ fn it_verifies() {
             ASN1SIG.to_vec(),
         )
         .unwrap();
-    assert_eq!(result, true)
+    assert!(result)
 }
 
 #[test]
@@ -122,5 +122,5 @@ fn it_does_not_verify_wrong_auth_data() {
             ASN1SIG.to_vec(),
         )
         .unwrap();
-    assert_eq!(result, false)
+    assert!(!result)
 }
