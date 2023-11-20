@@ -71,8 +71,7 @@ fn get_controller_data() -> Vec<u8> {
 
 #[test]
 fn it_can_read_webauthn_msg() {
-    let res: WebauthnRelayedTxMsg = from_binary(&Binary(WEB_MSG.to_vec())).unwrap();
-    println!("res: {:?}", res);
+    let _: WebauthnRelayedTxMsg = from_binary(&Binary(WEB_MSG.to_vec())).unwrap();
 }
 
 #[test]
