@@ -1,6 +1,6 @@
 [package]
 name = "vectis-webauthn-authenticator"
-version = "1.0.0-rc1"
+version = "1.0.0-rc2"
 authors = ["bwty <whalelephant@users.noreply.github.com>", "j0nl1 <j0nl1@gmail.com>"]
 edition = "2021"
 
