@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryMsg",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/AuthenticatorTraitQueryMsg"
+    },
+    {
+      "$ref": "#/definitions/QueryMsg"
+    }
+  ],
+  "definitions": {
+    "AuthenticatorTraitQueryMsg": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "authenticate"
+          ],
+          "properties": {
+            "authenticate": {
+              "type": "object",
+              "required": [
+                "controller_data",
+                "metadata",
+                "signature",
+                "signed_data"
+              ],
+              "properties": {
+                "controller_data": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "uint8",
+                    "minimum": 0.0
+                  }
+                },
+                "metadata": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "uint8",
+                      "minimum": 0.0
+                    }
+                  }
+                },
+                "signature": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "uint8",
+                    "minimum": 0.0
+                  }
+                },
+                "signed_data": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "uint8",
+                    "minimum": 0.0
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "contract_version"
+          ],
+          "properties": {
+            "contract_version": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "QueryMsg": {
+      "type": "string",
+      "enum": []
+    }
+  }
+}

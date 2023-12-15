@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExecuteMsg",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/AuthenticatorTraitExecMsg"
+    },
+    {
+      "$ref": "#/definitions/ExecMsg"
+    }
+  ],
+  "definitions": {
+    "AuthenticatorTraitExecMsg": {
+      "type": "string",
+      "enum": []
+    },
+    "ExecMsg": {
+      "type": "string",
+      "enum": []
+    }
+  }
+}
