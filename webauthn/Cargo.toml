@@ -27,7 +27,7 @@ optimize = """docker run --rm -v "$(pwd)":/code \
 
 [dependencies]
 cosmwasm-std = { workspace = true }
-cosmwasm-storage = { workspace = true }
+cw-storage-plus = { workspace = true }
 cosmwasm-schema  = { workspace = true }
 sylvia  = { workspace = true }
 sylvia-derive  = { workspace = true }
@@ -36,7 +36,7 @@ serde  = { workspace = true }
 serde-json-wasm  = { workspace = true }
 sha2  = { workspace = true }
 p256 = {version = "0.13.2", default-features = false, features = ["alloc", "ecdsa"]}
-vectis-wallet = { path = "../../../packages/vectis" }
+vectis-wallet = { path = "../../../interfaces/smartaccounts" }
 base64ct = {version = "1.6.0", default-features = false, features = ["alloc"] }
 
 [dev-dependencies]
