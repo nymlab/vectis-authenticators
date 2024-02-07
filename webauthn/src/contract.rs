@@ -56,22 +56,18 @@ mod auth_trait {
             metadata: Vec<Vec<u8>>,
             signature: Vec<u8>,
         ) -> Result<bool, Self::Error> {
-            // ---------------------
             // First: we check if the signed data contains the msgs we have been told to execute
-            // ---------------------
-            //
 
             let client_data = de_client_data(&metadata[1])?;
 
-            // the signed challenge should be the hash of the string of the `VectisRelayTx` type
+            // the signed challenge should be the hash of the hash of `SignDoc`
             let expected_hash_string = hash_to_base64url_string(&signed_data);
             if client_data.challenge != expected_hash_string {
                 return Err(AuthenticatorError::InvalidChallenge);
             }
 
-            // -------------------
             // Second: we can verify the signature
-            // -------------------
+            //
             // https://w3c.github.io/webauthn/#sctn-signature-attestation-types
             // Convert signature from ASN.1 sequence to "raw" format
             let verify_signature = DerSignature::from_bytes(&signature)
