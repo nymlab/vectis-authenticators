@@ -38,7 +38,7 @@ pub(crate) fn hash_to_base64url_string(data: &[u8]) -> String {
     base64ct::Base64UrlUnpadded::encode_string(Sha256::digest(data).as_slice())
 }
 
-mod auth_trait {
+pub mod auth_trait {
     use super::*;
 
     #[contract(module=crate::contract)]
