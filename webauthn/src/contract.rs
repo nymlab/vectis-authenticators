@@ -6,7 +6,7 @@ use sylvia::{
 };
 
 // Vectis lib
-use vectis_wallet::{
+use ptd_wallet::{
     interface::{authenticator_trait, AuthenticatorTrait},
     types::error::AuthenticatorError,
 };

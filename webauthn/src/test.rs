@@ -1,7 +1,7 @@
 use crate::contract::*;
 use cosmwasm_std::testing::{mock_dependencies, mock_env};
 use sylvia::types::QueryCtx;
-use vectis_wallet::interface::AuthenticatorTrait;
+use ptd_wallet::interface::AuthenticatorTrait;
 
 const PUB_KEY_BYTES: [u8; 65] = [
     4, 254, 213, 81, 121, 242, 209, 178, 171, 160, 209, 220, 243, 199, 156, 57, 7, 187, 116, 219,
