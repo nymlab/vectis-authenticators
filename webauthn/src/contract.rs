@@ -34,8 +34,8 @@ pub(crate) fn de_client_data(data: &[u8]) -> Result<CollectedClientData, Authent
         .map_err(|_| AuthenticatorError::DecodeData("client_data".into()))
 }
 
-pub(crate) fn hash_to_base64url_string(data: &[u8]) -> String {
-    base64ct::Base64UrlUnpadded::encode_string(Sha256::digest(data).as_slice())
+pub(crate) fn to_base64url_string(data: &[u8]) -> String {
+    base64ct::Base64UrlUnpadded::encode_string(data)
 }
 
 pub mod auth_trait {
@@ -60,8 +60,13 @@ pub mod auth_trait {
 
             let client_data = de_client_data(&metadata[1])?;
 
-            // the signed challenge should be the hash of the hash of `SignDoc`
-            let expected_hash_string = hash_to_base64url_string(&signed_data);
+            // NOTE: passkey client base64url encoding of the input challenge before signing
+            //
+            // We preveriously used hash_to_base64url_string to preserve the original message,
+            // (to decode into CosmosMsg),
+            // before but we do not need to do that anymore.
+            // This `signed_data` is just the txBytes from `sign_doc`
+            let expected_hash_string = to_base64url_string(&signed_data);
             if client_data.challenge != expected_hash_string {
                 return Err(AuthenticatorError::InvalidChallenge);
             }

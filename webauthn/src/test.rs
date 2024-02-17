@@ -1,7 +1,7 @@
-use crate::contract::*;
+use crate::{contract::*, types::*};
 use cosmwasm_std::testing::{mock_dependencies, mock_env};
+use ptd_wallet::{interface::AuthenticatorTrait, types::wallet::WebauthnCredData};
 use sylvia::types::QueryCtx;
-use ptd_wallet::interface::AuthenticatorTrait;
 
 const PUB_KEY_BYTES: [u8; 65] = [
     4, 254, 213, 81, 121, 242, 209, 178, 171, 160, 209, 220, 243, 199, 156, 57, 7, 187, 116, 219,
@@ -51,7 +51,7 @@ fn get_controller_data() -> Vec<u8> {
 fn it_de_client_data_correctly() {
     let client_data = de_client_data(&CLIENT_DATA).unwrap();
     let challenge = client_data.challenge;
-    assert_eq!(challenge, hash_to_base64url_string(&COSMOS_MSG))
+    assert_eq!(challenge, to_base64url_string(&COSMOS_MSG))
 }
 
 #[test]
