@@ -5,10 +5,11 @@ use sylvia::{
     types::{InstantiateCtx, QueryCtx},
 };
 
-// Vectis lib
+// Ptd Wallet: lib
 use ptd_wallet::{
     interface::{authenticator_trait, AuthenticatorTrait},
     types::error::AuthenticatorError,
+    util::webauthn::{de_client_data, to_base64url_string},
 };
 
 /// verification lib
@@ -17,10 +18,6 @@ use p256::ecdsa::{DerSignature, VerifyingKey};
 use p256::PublicKey;
 use sha2::{Digest, Sha256};
 
-// webauthn types and decoding
-use crate::types::CollectedClientData;
-use base64ct::Encoding;
-
 #[cfg(not(feature = "library"))]
 use sylvia::entry_points;
 
@@ -28,15 +25,6 @@ const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 pub struct Webauthn {}
-
-pub(crate) fn de_client_data(data: &[u8]) -> Result<CollectedClientData, AuthenticatorError> {
-    serde_json_wasm::from_slice(data)
-        .map_err(|_| AuthenticatorError::DecodeData("client_data".into()))
-}
-
-pub(crate) fn to_base64url_string(data: &[u8]) -> String {
-    base64ct::Base64UrlUnpadded::encode_string(data)
-}
 
 pub mod auth_trait {
     use super::*;

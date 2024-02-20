@@ -37,7 +37,6 @@ serde-json-wasm  = { workspace = true }
 sha2  = { workspace = true }
 p256 = {version = "0.13.2", default-features = false, features = ["alloc", "ecdsa"]}
 ptd-wallet = { path = "../../../interfaces/smartaccounts" }
-base64ct = {version = "1.6.0", default-features = false, features = ["alloc"] }
 
 [dev-dependencies]
 sylvia = { workspace = true, features = ["mt"] }
