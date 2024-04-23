@@ -5,8 +5,7 @@ use sylvia::{
     types::{InstantiateCtx, QueryCtx},
 };
 
-// Ptd Wallet: lib
-use ptd_wallet::{
+use ptd_interfaces::abstractaccount::{
     interface::{authenticator_trait, AuthenticatorTrait},
     types::error::AuthenticatorError,
     util::webauthn::{de_client_data, to_base64url_string},
