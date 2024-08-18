@@ -1,5 +1,5 @@
 [package]
-name = "ptd-webauthn-authenticator"
+name = "dchain-webauthn-authenticator"
 version = "0.1.0"
 authors = ["bwty <whalelephant@users.noreply.github.com>", "j0nl1 <j0nl1@gmail.com>"]
 edition = "2021"
@@ -36,7 +36,7 @@ serde  = { workspace = true }
 serde-json-wasm  = { workspace = true }
 sha2  = { workspace = true }
 p256 = {version = "0.13.2", default-features = false, features = ["alloc", "ecdsa"]}
-ptd-interfaces = { path = "../../../interfaces" }
+dchain-interfaces = { path = "../../../interfaces" }
 
 [dev-dependencies]
 sylvia = { workspace = true, features = ["mt"] }
