@@ -5,7 +5,7 @@ use sylvia::{
     types::{InstantiateCtx, QueryCtx},
 };
 
-use ptd_interfaces::abstractaccount::{
+use dchain_interfaces::abstractaccount::{
     interface::{authenticator_trait, AuthenticatorTrait},
     types::error::AuthenticatorError,
     util::webauthn::{de_client_data, to_base64url_string},

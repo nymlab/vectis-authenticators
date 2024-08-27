@@ -1,5 +1,5 @@
 {
-  "contract_name": "ptd-webauthn-authenticator",
+  "contract_name": "dchain-webauthn-authenticator",
   "contract_version": "0.1.0",
   "idl_version": "1.0.0",
   "instantiate": {
