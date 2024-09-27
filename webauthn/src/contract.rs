@@ -29,11 +29,11 @@ pub mod auth_trait {
     use super::*;
 
     #[contract(module=crate::contract)]
-    #[messages(authenticator_trait as AuthenticatorTrait)]
+    #[sv::messages(authenticator_trait as AuthenticatorTrait)]
     impl AuthenticatorTrait for Webauthn {
         type Error = AuthenticatorError;
 
-        #[msg(query)]
+        #[sv::msg(query)]
         fn authenticate(
             &self,
             _ctx: QueryCtx,
@@ -79,7 +79,7 @@ pub mod auth_trait {
             Ok(result.is_ok())
         }
 
-        #[msg(query)]
+        #[sv::msg(query)]
         fn contract_version(&self, ctx: QueryCtx) -> Result<ContractVersion, StdError> {
             get_contract_version(ctx.deps.storage)
         }
@@ -88,14 +88,14 @@ pub mod auth_trait {
 
 #[cfg_attr(not(feature = "library"), entry_points)]
 #[contract]
-#[error(AuthenticatorError)]
-#[messages(authenticator_trait as AuthenticatorTrait)]
+#[sv::error(AuthenticatorError)]
+#[sv::messages(authenticator_trait as AuthenticatorTrait)]
 impl Webauthn {
     pub const fn new() -> Self {
         Self {}
     }
 
-    #[msg(instantiate)]
+    #[sv::msg(instantiate)]
     fn instantiate(&self, ctx: InstantiateCtx) -> Result<Response, AuthenticatorError> {
         set_contract_version(ctx.deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
         let event = self.get_event("instantiate");
