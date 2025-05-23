@@ -8,7 +8,7 @@ A Proxy Authenticator is a way to verify / authenticate the signature / intent o
 The `Entity` can choose the authentication method, typically to be Webauthn / Passkeys. However, more authenticators can
 be added in the future.
 
-Authenticators are shared between all Proxies and their addresses are stored in D-Chain's Abstract Account module.
+Authenticators are shared between all Proxies and their addresses are stored in Dchain's Abstract Account module.
 
 ### Interactions with other contracts / modules
 
